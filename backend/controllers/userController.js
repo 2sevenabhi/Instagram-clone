@@ -7,7 +7,7 @@ const sendEmail = require('../utils/sendEmail');
 const crypto = require('crypto');
 const { deleteFile } = require('../utils/awsFunctions');
 
-// Signup User
+
 exports.signupUser = catchAsync(async (req, res, next) => {
 
     const { name, email, username, password } = req.body;
@@ -33,7 +33,7 @@ exports.signupUser = catchAsync(async (req, res, next) => {
     sendCookie(newUser, 201, res);
 });
 
-// Login User
+
 exports.loginUser = catchAsync(async (req, res, next) => {
 
     const { userId, password } = req.body;
@@ -55,7 +55,7 @@ exports.loginUser = catchAsync(async (req, res, next) => {
     sendCookie(user, 201, res);
 });
 
-// Logout User
+
 exports.logoutUser = catchAsync(async (req, res, next) => {
     res.cookie('token', null, {
         expires: new Date(Date.now()),
@@ -68,7 +68,7 @@ exports.logoutUser = catchAsync(async (req, res, next) => {
     });
 });
 
-// Get User Details --Logged In User
+
 exports.getAccountDetails = catchAsync(async (req, res, next) => {
 
     const user = await User.findById(req.user._id).populate({
@@ -84,7 +84,7 @@ exports.getAccountDetails = catchAsync(async (req, res, next) => {
     });
 });
 
-// Get User Details
+
 exports.getUserDetails = catchAsync(async (req, res, next) => {
 
     const user = await User.findOne({ username: req.params.username }).populate("followers following").populate({
@@ -121,7 +121,7 @@ exports.getUserDetails = catchAsync(async (req, res, next) => {
     });
 });
 
-// Get User Details By Id
+
 exports.getUserDetailsById = catchAsync(async (req, res, next) => {
 
     const user = await User.findById(req.params.id)
@@ -132,7 +132,7 @@ exports.getUserDetailsById = catchAsync(async (req, res, next) => {
     });
 });
 
-// Get All Users
+
 exports.getAllUsers = catchAsync(async (req, res, next) => {
 
     const users = await User.find();
@@ -145,7 +145,7 @@ exports.getAllUsers = catchAsync(async (req, res, next) => {
     });
 });
 
-// Update Password
+
 exports.updatePassword = catchAsync(async (req, res, next) => {
 
     const { oldPassword, newPassword } = req.body;
@@ -163,7 +163,7 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
     sendCookie(user, 201, res);
 });
 
-// Update Profile
+
 exports.updateProfile = catchAsync(async (req, res, next) => {
 
     const { name, username, website, bio, email } = req.body;
@@ -201,7 +201,7 @@ exports.updateProfile = catchAsync(async (req, res, next) => {
     });
 });
 
-// Delete Profile ⚠️⚠️
+
 exports.deleteProfile = catchAsync(async (req, res, next) => {
 
     const user = await User.findById(req.user._id);
@@ -210,7 +210,7 @@ exports.deleteProfile = catchAsync(async (req, res, next) => {
     const following = user.following;
     const userId = user._id;
 
-    // delete post & user images ⚠️⚠️
+
 
     await user.remove();
 
@@ -246,7 +246,7 @@ exports.deleteProfile = catchAsync(async (req, res, next) => {
     });
 });
 
-// Follow | Unfollow User
+
 exports.followUser = catchAsync(async (req, res, next) => {
 
     const userToFollow = await User.findById(req.params.id);
@@ -284,7 +284,7 @@ exports.followUser = catchAsync(async (req, res, next) => {
     }
 });
 
-// Forgot Password
+
 exports.forgotPassword = catchAsync(async (req, res, next) => {
 
     const user = await User.findOne({ email: req.body.email });
@@ -322,7 +322,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
     }
 });
 
-// Reset Password
+
 exports.resetPassword = catchAsync(async (req, res, next) => {
 
     const resetPasswordToken = crypto.createHash("sha256").update(req.params.token).digest("hex");
@@ -344,7 +344,7 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
     sendCookie(user, 200, res);
 });
 
-// User Search
+
 exports.searchUsers = catchAsync(async (req, res, next) => {
 
     if (req.query.keyword) {

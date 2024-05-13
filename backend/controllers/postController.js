@@ -4,7 +4,7 @@ const catchAsync = require('../middlewares/catchAsync');
 const ErrorHandler = require('../utils/errorHandler');
 const { deleteFile } = require('../utils/awsFunctions');
 
-// Create New Post
+
 exports.newPost = catchAsync(async (req, res, next) => {
 
     const postData = {
@@ -25,7 +25,7 @@ exports.newPost = catchAsync(async (req, res, next) => {
     });
 });
 
-// Like or Unlike Post
+
 exports.likeUnlikePost = catchAsync(async (req, res, next) => {
 
     const post = await Post.findById(req.params.id);
@@ -56,7 +56,6 @@ exports.likeUnlikePost = catchAsync(async (req, res, next) => {
     }
 });
 
-// Delete Post
 exports.deletePost = catchAsync(async (req, res, next) => {
 
     const post = await Post.findById(req.params.id);
@@ -85,7 +84,7 @@ exports.deletePost = catchAsync(async (req, res, next) => {
     });
 });
 
-// Update Caption
+
 exports.updateCaption = catchAsync(async (req, res, next) => {
 
     const post = await Post.findById(req.params.id);
@@ -108,7 +107,7 @@ exports.updateCaption = catchAsync(async (req, res, next) => {
     });
 });
 
-// Add Comment
+
 exports.newComment = catchAsync(async (req, res, next) => {
 
     const post = await Post.findById(req.params.id);
@@ -134,7 +133,7 @@ exports.newComment = catchAsync(async (req, res, next) => {
     });
 });
 
-// Posts of Following
+
 exports.getPostsOfFollowing = catchAsync(async (req, res, next) => {
 
     const user = await User.findById(req.user._id)
@@ -167,7 +166,7 @@ exports.getPostsOfFollowing = catchAsync(async (req, res, next) => {
     });
 });
 
-// Save or Unsave Post
+
 exports.saveUnsavePost = catchAsync(async (req, res, next) => {
 
     const user = await User.findById(req.user._id)
@@ -202,7 +201,7 @@ exports.saveUnsavePost = catchAsync(async (req, res, next) => {
     }
 });
 
-// Get Post Details
+
 exports.getPostDetails = catchAsync(async (req, res, next) => {
 
     const post = await Post.findById(req.params.id).populate("postedBy likes").populate({
@@ -222,7 +221,7 @@ exports.getPostDetails = catchAsync(async (req, res, next) => {
     });
 });
 
-// Get All Posts
+
 exports.allPosts = catchAsync(async (req, res, next) => {
 
     const posts = await Post.find();

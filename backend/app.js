@@ -13,7 +13,7 @@ if (process.env.NODE_ENV != "production") {
     require('dotenv').config({ path: 'backend/config/config.env' });
 }
 
-// import routes
+
 const post = require('./routes/postRoute');
 const user = require('./routes/userRoute');
 const chat = require('./routes/chatRoute');
@@ -24,7 +24,7 @@ app.use('/api/v1', user);
 app.use('/api/v1', chat);
 app.use('/api/v1', message);
 
-// error middleware
+
 app.use(errorMiddleware);
 
 module.exports = app;

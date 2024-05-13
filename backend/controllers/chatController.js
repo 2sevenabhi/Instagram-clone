@@ -1,7 +1,7 @@
 const catchAsync = require("../middlewares/catchAsync");
 const Chat = require("../models/chatModel");
 
-// Create New Chat
+
 exports.newChat = catchAsync(async (req, res, next) => {
 
     const chatExists = await Chat.findOne({
@@ -27,7 +27,7 @@ exports.newChat = catchAsync(async (req, res, next) => {
     });
 });
 
-// Get All Chats
+
 exports.getChats = catchAsync(async (req, res, next) => {
 
     const chats = await Chat.find(
