@@ -22,7 +22,7 @@ exports.newMessage = catchAsync(async (req, res, next) => {
         newMessage,
     });
 });
-
+//get all messages
 
 exports.getMessages = catchAsync(async (req, res, next) => {
 
